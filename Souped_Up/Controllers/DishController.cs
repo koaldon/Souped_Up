@@ -3,6 +3,7 @@ using Kendo.Mvc.UI;
 using Microsoft.AspNet.Identity;
 using Souped_Up.Data;
 using Souped_Up.Models;
+using Souped_Up.Services.Implementations;
 using Souped_Up.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -30,9 +31,18 @@ namespace Souped_Up.Controllers
             var userId = Guid.Parse(User.Identity.GetUserId());
             var model = DishService.GetUserDishes(userId);
 
+
+            //var userId = Guid.Parse(User.Identity.GetUserId())
+            //var ingServ = GetIngredientService();
+            //var getIngredient = ingServ.GetUserIngredients(userId);
+            //ViewBag.Ingredients = getIngredient.ToList();
+            //return View();
             return View(model);
         }
+        //public IngredientService GetUserIngredients()
+        //{
 
+        //}
         public ActionResult ListDish(DishViewListItemModel model)
         {
             return PartialView(model);
@@ -104,12 +114,12 @@ namespace Souped_Up.Controllers
             return RedirectToAction("Index");
         }
         [HttpPost]
-        public JsonResult GetIngredients([DataSourceRequest] DataSourceRequest request)
+        public JsonResult GetIngredients()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
             var ingredients = IngredientService.GetUserIngredients(userId);
 
-            return Json(ingredients.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+            return Json(ingredients, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public JsonResult GetTags()

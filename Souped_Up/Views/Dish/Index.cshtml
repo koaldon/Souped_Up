@@ -1,0 +1,29 @@
+﻿@model Souped_Up.Models.DishViewListModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Dishes</h2>
+
+<p>
+    @Html.ActionLink("Create a Dish", "Create")
+</p>
+@if (TempData.ContainsKey("SaveResult"))
+{
+    <div class="alert alert-success fade in" role="alert">
+        @ViewBag.SaveResult
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&timesl</span>
+        </button>
+        @TempData["SaveResult"]
+    </div>
+}
+
+@*search bar to filter Dish Name*@
+@*Filter by tag*@
+@foreach (var model in Model.Dishes)
+{
+    @Html.Partial("ListDish", model);
+}
+

@@ -1,0 +1,64 @@
+﻿@model Souped_Up.Models.DishViewListItemModel
+
+<style>
+    .row {
+        position: relative;
+        bottom: -10px;
+        left: 0;
+    }
+
+    .col-md-9 {
+        position: relative;
+        bottom: -10px;
+    }
+</style>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="row">
+    <div class="col-md-3">
+        <h4>
+            @Html.DisplayFor(model => model.Name)
+        </h4>
+    </div>
+    <div class="col-md-9 ">
+        @Html.DisplayNameFor(model => model.Tags):
+        @Html.DisplayFor(model => model.DisplayTags)
+    </div>
+</div>
+<div>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ingredients)
+            </th>
+        </tr>
+        @if (Model.Ingredients != null)
+        {
+
+            foreach (var item in Model.Ingredients)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+</div>
+<div class="row">
+    <div class="col-md-2">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Details", "Detail", new { id = Model.Id }) |
+        @Html.ActionLink("Remove", "Delete", new { id = Model.Id })
+        </p>
+    </div>
+    <div class="col-md-offset-10">
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+<hr />
+

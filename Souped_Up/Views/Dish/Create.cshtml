@@ -1,0 +1,107 @@
+﻿@model Souped_Up.Models.DishViewCreateModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <h3>Name</h3>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div>
+            <h3>Ingredients</h3>
+            <div class="row">
+                <div class="col-md-4">
+                    <h6>Select Ingredients for this Dish</h6>
+                    <select id="multiselect" style="width: 250px;">
+                        @(Html.Kendo().MultiSelectFor(model=>model.Ingredients)
+            .Name("ingredientMultiSelect")
+            .Placeholder("Select Ingredients...")
+            .DataTextField("Name")
+            .DataValueField("Id")
+           .AutoBind(true)
+            .Height(300)
+
+            .DataSource(source =>
+            {
+                source.Read(read =>
+                {
+                    read.Action("GetIngredients", "Dishr");
+                })
+                .ServerFiltering(true);
+
+            })
+            )
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    @Html.ActionLink("Create New Ingredient", "Create", "Ingredient")
+                </div>
+            </div>
+
+            <br />
+        </div>
+        <div>
+            <h3>Tags</h3>
+            <div class="row">
+                <div class="col-md-4">
+                    <h6>Select Tags for this Dish</h6>
+                    <select id="multiselect" style="width: 250px;">
+                        @(Html.Kendo().MultiSelectFor(model => model.Tags)
+            .Name("tagMultiSelect")
+            .Placeholder("Select Tags...")
+            .DataTextField("Name")
+            .DataValueField("Id")
+            .Height(300)
+            .DataSource(source =>
+            {
+
+            source.Read(read =>
+            {
+                read.Action("GetTags","DishController");
+            })
+            .ServerFiltering(true);
+
+            })
+            )
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    @Html.ActionLink("Create New Tag", "Create", "Tag")
+                </div>
+            </div>
+            <br />
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/kendo")
+}
+
+

@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<style>
+    .jumbotron {
+        background-image: url(../../Content/Assets/background.jpg);
+        background-size:cover;
+    }
+    .jumbotron h1{
+       font-family:'Freestyle Script';
+       font-size:150px;
+       position:relative;
+       left: 575px;
+       top:10px;
+       
+    }
+    .jumbotron p{
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size:20px;
+        position:relative;
+        left: 675px;
+    }
+</style>
+
+<div class="jumbotron">
+    <h1>Souped-Up</h1>
+    <p class="lead">Meal planning made easy.</p>
+    @Html.ActionLink("Learn More About Us", "About", null, new { @style ="position:relative; top:20px; left:900px;"})
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <h2>View your Meals</h2>
+        <p>Create, Edit, Delete, or find more information about your meals!</p>
+        @Html.ActionLink("View Meals", "Index", "Meal", null, new { @class = "btn btn-primary btn-large" })
+    </div>
+    <div class="col-md-3">
+        <h2>View your Dishes</h2>
+        <p>Create, Edit, Delete, or find more information about your dishes!</p>
+        @Html.ActionLink("View Dishes", "Index", "Dish", null, new { @class = "btn btn-primary btn-large" })
+    </div>
+    <div class="col-md-3">
+        <h2>View your Ingredients</h2>
+        <p>Create, Edit, Delete, or find more information about your ingredients!</p>
+        @Html.ActionLink("View Ingredients", "Index", "Ingredient", null, new { @class = "btn btn-primary btn-large" })
+    </div>
+    <div class="col-md-3">
+        <h2>View your Tags</h2>
+        <p>Create, Edit, Delete, or find more information about your tags!</p>
+        @Html.ActionLink("View Tags", "Index", "Tag", null, new { @class = "btn btn-primary btn-large" })
+    </div>
+</div>

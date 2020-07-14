@@ -1,0 +1,43 @@
+﻿@model Souped_Up.Models.IngredientViewDetailModel
+
+@{
+    ViewBag.Title = "Detail";
+}
+
+
+
+<h2>Ingredient Details</h2>
+
+<div>
+   
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MeasureAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MeasureAmount)
+        </dd>
+    </dl>
+    <dl>
+        <dt>
+            @Html.DisplayNameFor(model => model.Measure)
+        </dt>
+        <dd>
+            @Html.DisplayNameFor(model => model.Measure)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,49 @@
+﻿@model Souped_Up.Models.MealViewDetailModel
+
+@{
+    ViewBag.Title = "Detail";
+}
+
+<h2>Meal Details</h2>
+
+<div class="row">
+    <div class="col-md-3">
+        <h4>
+            @Html.DisplayFor(model => model.Name)
+        </h4>
+    </div>
+    <div class="col-md-9 ">
+        @Html.DisplayNameFor(model => model.Tags):
+        @Html.DisplayFor(model => model.DisplayTags)
+    </div>
+</div>
+
+@*add expanding option for dishes to show ingredients*@
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Dishes)
+        </th>
+    </tr>
+    @foreach (var item in Model.Dishes)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "DishController", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Detail", "DishController", new { id = item.Id }) |
+                @Html.ActionLink("Remove", "Delete", "DishController", new { id = item.Id })
+            </td>
+        </tr>
+
+    }
+
+</table>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

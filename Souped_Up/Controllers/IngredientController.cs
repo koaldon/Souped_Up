@@ -66,7 +66,7 @@ namespace Souped_Up.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IngredientViewEditModel model)
+        public ActionResult Edit(IngredientViewEditModel model)
         {
             if (!ModelState.IsValid) return View(model);
 

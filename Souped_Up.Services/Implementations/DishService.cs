@@ -98,7 +98,18 @@ namespace Souped_Up.Services.Implementations
         public bool Update(DishViewEditModel model)
         {
             var dish = dishRepo.GetById(model.Id);
-
+            var ingredients = new List<Ingredient>();
+            model.Ingredients.ForEach(x =>
+            {
+                ingredients.Add(ingredientRepo.GetById(x));
+                
+            });
+            var tags = new List<Tag>();
+            model.Tags.ForEach(x =>
+            {
+                tags.Add(tagRepo.GetById(x));
+                
+            });
             dish.Name = model.Name;
             dish.Ingredients = (ICollection<Ingredient>)model.Ingredients;
             dish.Tags = (ICollection<Tag>)model.Tags;

@@ -36,24 +36,7 @@
                     @Html.ListBoxFor(m => m.Dishes, new
                  MultiSelectList(Model.DishData.OrderBy(c => c.Name), "Id", "Name",
                  Model.Dishes), new { Multiple = "multiple", style = "width:250px;" })
-                    @*@(Html.Kendo().MultiSelectFor(model => model.Dishes)
-        .Name("selectDish")
-        .Placeholder("Select Dishes...")
-        .DataTextField("Name")
-        .DataValueField("Id")
-        .Value(new[] {2, 7})
-        .Height(300)
-
-        .DataSource(source =>
-        {
-        source.Read(read =>
-        {
-            read.Action("GetDishes","Meal");
-        })
-        .ServerFiltering(true);
-
-        })
-        )*@
+          
 
                 </div>
                 <div class="col-md-5">
@@ -71,25 +54,6 @@
                     @Html.ListBoxFor(m => m.Tags, new
                    MultiSelectList(Model.TagData.OrderBy(c => c.Name), "Id", "Name",
                    Model.Tags), new { Multiple = "multiple", style = "width:250px;" })
-
-                    @*@(Html.Kendo().MultiSelectFor(model => model.Tags)
-        .Name("selectTag")
-        .Placeholder("Select Tags...")
-        .DataTextField("Name")
-        .DataValueField("Id")
-        .Value(new[] {2, 7})
-        .Height(300)
-
-        .DataSource(source =>
-        {
-        source.Read(read =>
-        {
-            read.Action("GetTags","Meal");
-        })
-        .ServerFiltering(true);
-
-        })
-        )*@
 
                 </div>
                 <div class="col-md-5">
@@ -113,7 +77,7 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/kendo")
+    
 
 }
 

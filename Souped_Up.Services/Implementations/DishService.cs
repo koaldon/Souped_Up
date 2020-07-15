@@ -25,6 +25,7 @@ namespace Souped_Up.Services.Implementations
             tagRepo = tag;
             dishRepo.Db = context;
             ingredientRepo.Db = context;
+            tagRepo.Db = context;
         }
 
         //Create

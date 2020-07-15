@@ -25,6 +25,7 @@ namespace Souped_Up.Services.Implementations
             dishRepo = dish;
             dishRepo.Db = context;
             mealRepo.Db = context;
+            tagRepo.Db = context;
         }
 
         //Create
@@ -70,7 +71,9 @@ namespace Souped_Up.Services.Implementations
                 model.Meals.Add(new MealViewListItemModel
                 {
                     Id = meal.Id,
-                    Name = meal.Name
+                    Name = meal.Name,
+                    Dishes=meal.Dishes,
+                    Tags=meal.Tags
                 });
             }
             return model;

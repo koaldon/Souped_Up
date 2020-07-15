@@ -26,33 +26,15 @@
             <h3>Ingredients</h3>
             <div class="row">
                 <div class="col-md-4">
-
                     <h6>Select Ingredients for this Dish</h6>
-                   
-                    @Html.ListBoxFor(m=>m.Ingredients, new
-                   MultiSelectList(Model.IngredientData.OrderBy(c=>c.Name), "Id", "Name",
-                   Model.Ingredients), "Select Ingredients")
-                    @*@(Html.Kendo().(model=> model.Ingredients)
-            .DataTextField("Name")
-            .DataValueField("Id")
-            .Placeholder("Select Ingredients...")
-            .AutoBind(false)
-            .DataSource(source =>
-            {
-                source.Read(read =>
-                {
-                    read.Action("GetIngredients", "Dish");
-
-                });
-            })
-            .ValuePrimitive(true)
-            )*@
+                    @Html.ListBoxFor(m => m.Ingredients, new
+                   MultiSelectList(Model.IngredientData.OrderBy(c => c.Name), "Id", "Name",
+                   Model.Ingredients), new { Multiple = "multiple", style = "width:250px;" })
                 </div>
                 <div class="col-md-3">
                     @Html.ActionLink("Create New Ingredient", "Create", "Ingredient")
                 </div>
             </div>
-
             <br />
         </div>
         <div>
@@ -61,33 +43,14 @@
                 <div class="col-md-4">
                     <h6>Select Tags for this Dish</h6>
                     @Html.ListBoxFor(m => m.Tags, new
-                   MultiSelectList(Model.TagData.OrderBy(c => c.Name), "Id", "Name",
-                   Model.Tags), "Select Tags")
-
-                    @*@(Html.Kendo().MultiSelectFor(model => model.Tags)
-
-        .Placeholder("Select Tags...")
-        .DataTextField("Name")
-        .DataValueField("Id")
-        .Height(300)
-
-        .DataSource(source =>
-        {
-
-            source.Read(read =>
-            {
-                read.Action("GetTags", "Dish");
-            });
-        })
-        )*@
-
+                     MultiSelectList(Model.TagData.OrderBy(c => c.Name), "Id", "Name",
+                     Model.Tags), new { Multiple = "multiple", style = "width:250px;" })
                 </div>
                 <div class="col-md-3">
                     @Html.ActionLink("Create New Tag", "Create", "Tag")
                 </div>
             </div>
             <br />
-
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Create" class="btn btn-default" />

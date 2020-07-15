@@ -34,10 +34,7 @@ namespace Souped_Up.Controllers
 
             return View(model);
         }
-        //public IngredientService GetUserIngredients()
-        //{
-
-        //}
+    
         public ActionResult ListDish(DishViewListItemModel model)
         {
             return PartialView(model);

@@ -35,7 +35,7 @@
 
                     @Html.ListBoxFor(m => m.Dishes, new
                  MultiSelectList(Model.DishData.OrderBy(c => c.Name), "Id", "Name",
-                 Model.Dishes), "Select Dishes")
+                 Model.Dishes), new { Multiple = "multiple", style = "width:250px;" })
                     @*@(Html.Kendo().MultiSelectFor(model => model.Dishes)
         .Name("selectDish")
         .Placeholder("Select Dishes...")
@@ -70,7 +70,7 @@
                     <h6>Select Tags for this Meal</h6>
                     @Html.ListBoxFor(m => m.Tags, new
                    MultiSelectList(Model.TagData.OrderBy(c => c.Name), "Id", "Name",
-                   Model.Tags), "Select Tags")
+                   Model.Tags), new { Multiple = "multiple", style = "width:250px;" })
 
                     @*@(Html.Kendo().MultiSelectFor(model => model.Tags)
         .Name("selectTag")

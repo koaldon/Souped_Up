@@ -9,6 +9,8 @@
 <p>
     @Html.ActionLink("Create a Dish", "Create")
 </p>
+
+
 @if (TempData.ContainsKey("SaveResult"))
 {
     <div class="alert alert-success fade in" role="alert">
@@ -26,4 +28,6 @@
 {
     @Html.Partial("ListDish", model);
 }
-
+<div class="col-md-offset-10">
+    @Html.ActionLink("Main Menu", "Index", "Home")
+</div>

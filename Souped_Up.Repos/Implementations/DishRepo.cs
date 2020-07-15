@@ -11,11 +11,11 @@ namespace Souped_Up.Repos.Implementations
     {
         public DishRepo(ApplicationDbContext ctx)
         {
-            _db = ctx;
+            Db = ctx;
         }
         public ICollection<Dish> GetByUserId(Guid id)
         {
-            var dishes = _db.Set<Dish>().Where(x => x.UserId == id).ToList();
+            var dishes = Db.Set<Dish>().Include(d=>d.Ingredients).Where(x => x.UserId == id).ToList();
             return dishes;
         }
     }

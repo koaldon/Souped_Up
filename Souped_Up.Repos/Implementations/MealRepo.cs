@@ -12,12 +12,12 @@ namespace Souped_Up.Repos.Implementations
     {
         public MealRepo(ApplicationDbContext ctx)
         {
-            _db = ctx;
+            Db = ctx;
         }
 
         public ICollection<Meal> GetByUserId(Guid id)
         {
-            var meals = _db.Set<Meal>().Where(x => x.UserId == id).ToList();
+            var meals = Db.Set<Meal>().Where(x => x.UserId == id).ToList();
             return meals;
         }
     }

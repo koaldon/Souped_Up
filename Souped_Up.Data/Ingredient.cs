@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -20,6 +21,12 @@ namespace Souped_Up.Data
         //UserId Foreign Key
         public Guid UserId { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Dish> Dishes { get; set; }
+
+        public Ingredient()
+        {
+            Dishes = new HashSet<Dish>();
+        }
     }
 }

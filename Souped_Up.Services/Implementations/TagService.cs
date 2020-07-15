@@ -37,6 +37,11 @@ namespace Souped_Up.Services.Implementations
             var tag = tagRepo.GetById(id);
             return tag;
         }
+        public ICollection<Tag> GetUserTagSelectList(Guid id)
+        {
+            var tags = tagRepo.GetByUserId(id);
+            return (tags);
+        }
         public IEnumerable<TagViewListModel> GetUserTags(Guid id)
         {
             var tags = tagRepo.GetByUserId(id);

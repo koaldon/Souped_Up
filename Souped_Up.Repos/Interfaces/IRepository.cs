@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,5 +18,7 @@ namespace Souped_Up.Repos.Interfaces
         ICollection<T>Get();
 
         bool DeleteById(int id);
+
+        DbContext Db { get; set; }
     }
 }

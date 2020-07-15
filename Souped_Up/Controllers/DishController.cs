@@ -1,6 +1,7 @@
 ﻿using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
 using Souped_Up.Data;
 using Souped_Up.Models;
 using Souped_Up.Services.Implementations;
@@ -31,12 +32,6 @@ namespace Souped_Up.Controllers
             var userId = Guid.Parse(User.Identity.GetUserId());
             var model = DishService.GetUserDishes(userId);
 
-
-            //var userId = Guid.Parse(User.Identity.GetUserId())
-            //var ingServ = GetIngredientService();
-            //var getIngredient = ingServ.GetUserIngredients(userId);
-            //ViewBag.Ingredients = getIngredient.ToList();
-            //return View();
             return View(model);
         }
         //public IngredientService GetUserIngredients()
@@ -50,8 +45,15 @@ namespace Souped_Up.Controllers
         //GET
         public ActionResult Create()
         {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+
+            var ingredients = IngredientService.GetUserIngredientSelectList(userId);
+            var tags = TagService.GetUserTagSelectList(userId);
             DishViewCreateModel model = new DishViewCreateModel();
+            model.IngredientData = ingredients.ToList();
+            model.TagData = tags.ToList();
             return View(model);
+
         }
 
         //Post
@@ -112,22 +114,6 @@ namespace Souped_Up.Controllers
             TempData["SaveResult"] = "Your dish was deleted";
 
             return RedirectToAction("Index");
-        }
-        [HttpPost]
-        public JsonResult GetIngredients()
-        {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var ingredients = IngredientService.GetUserIngredients(userId);
-
-            return Json(ingredients, JsonRequestBehavior.AllowGet);
-        }
-        [HttpPost]
-        public JsonResult GetTags()
-        {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var tags = TagService.GetUserTags(userId);
-
-            return Json(tags, JsonRequestBehavior.AllowGet);
         }
     }
 }

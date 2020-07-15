@@ -21,6 +21,7 @@ namespace Souped_Up.Services.Interfaces
         MealViewEditModel GetEditById(int id);
 
         MealViewListModel GetUserMeals(Guid id);
+        
 
         bool Delete(int id);
     }

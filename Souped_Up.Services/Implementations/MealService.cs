@@ -15,23 +15,42 @@ namespace Souped_Up.Services.Implementations
     public class MealService : IMealService
     {
         private IMealRepo mealRepo { get; set; }
+        private ITagRepo tagRepo { get; set; }
+        private IDishRepo dishRepo { get; set; }
 
-        public MealService(IMealRepo meal)
+        public MealService(IMealRepo meal,IDishRepo dish,  ITagRepo tag, ApplicationDbContext context)
         {
             mealRepo = meal;
+            tagRepo = tag;
+            dishRepo = dish;
+            dishRepo.Db = context;
+            mealRepo.Db = context;
         }
 
         //Create
         public bool Create(MealViewCreateModel model)
         {
+            var dishes = new List<Dish>();
+            model.Dishes.ForEach(x =>
+            {
+                dishes.Add(dishRepo.GetById(x));
+
+            });
+            var tags = new List<Tag>();
+            model.Tags.ForEach(x =>
+            {
+                tags.Add(tagRepo.GetById(x));
+
+            });
             var meal = new Meal
             {
                 UserId = model.UserId,
                 Name = model.Name,
-                Dishes = (ICollection<Dish>)(model.Dishes == null ? new List<Dish>() : model.Dishes.SelectedValues),
-                Tags = (ICollection<Tag>)(model.Tags == null ? new List<Tag>() : model.Tags.SelectedValues)
+                Dishes = dishes,
+                Tags = tags
+
             };
-            meal = mealRepo.Create(meal);
+            meal = mealRepo.Create(meal); ;
             return meal.Id != 0;
         }
         //Read
@@ -40,6 +59,7 @@ namespace Souped_Up.Services.Implementations
             var meal = mealRepo.GetById(id);
             return meal;
         }
+     
         public MealViewListModel GetUserMeals(Guid id)
         {
             var meals = mealRepo.GetByUserId(id);
@@ -75,7 +95,7 @@ namespace Souped_Up.Services.Implementations
 
             meal.Name = model.Name;
            //meal.Dishes = model.Dishes;
-            //meal.Tags = model.Tags;
+           // meal.Tags = model.Tags;
 
             return mealRepo.Update(meal);
 
@@ -87,8 +107,8 @@ namespace Souped_Up.Services.Implementations
             var model = new MealViewEditModel
             {
                 Name = meal.Name,
-                Dishes = new SelectList(meal.Dishes),
-                Tags = new SelectList(meal.Tags)
+                //Dishes = new SelectList(meal.Dishes),
+                //Tags = new SelectList(meal.Tags)
             };
 
             return model;

@@ -43,7 +43,12 @@ namespace Souped_Up.Controllers
         //GET
         public ActionResult Create()
         {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var dishes = DishService.GetUserDishSelectList(userId);
+            var tags = TagService.GetUserTagSelectList(userId);
             MealViewCreateModel model = new MealViewCreateModel();
+            model.DishData = dishes.ToList();
+            model.TagData = tags.ToList();
             return View(model);
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -24,7 +25,13 @@ namespace Souped_Up.Data
         public Guid UserId { get; set; }
 
         //Ingredient Foreign Key List
-        public virtual ICollection<Ingredient> Ingredients { get; set; }
+        public ICollection<Ingredient> Ingredients { get; set; }
+
+        public Dish()
+        {
+            Ingredients = new HashSet<Ingredient>();
+            Tags = new HashSet<Tag>();
+        }
 
 
 

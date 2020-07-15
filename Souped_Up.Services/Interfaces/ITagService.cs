@@ -22,6 +22,8 @@ namespace Souped_Up.Services.Interfaces
 
        IEnumerable<TagViewListModel> GetUserTags(Guid id);
 
+        ICollection<Tag> GetUserTagSelectList(Guid id);
+
         bool Delete(int id);
     }
 }

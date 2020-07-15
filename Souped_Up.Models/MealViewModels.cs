@@ -24,14 +24,16 @@ namespace Souped_Up.Models
         [MinLength(2, ErrorMessage = "Please enter at least 2 characters.")]
         [MaxLength(100, ErrorMessage = "Please use less than 100 characters.")]
         public string Name { get; set; }
-        public SelectList Tags { get; set; }
-        public SelectList Dishes { get; set; }
+        public List<int> Tags { get; set; }
+        public List<int> Dishes { get; set; }
+        public List<Dish> DishData { get; set; }
+        public List<Tag> TagData { get; set; }
         public Guid UserId { get; set; }
 
         public MealViewCreateModel()
         {
-            Dishes = new SelectList(new List<Dish>());
-            Tags = new SelectList(new List<Tag>());
+            Dishes =new List<int>();
+            Tags =new List<int>();
         }
     }
     public class MealViewDetailModel //Detail
@@ -56,8 +58,10 @@ namespace Souped_Up.Models
         [MinLength(2, ErrorMessage = "Please enter at least 2 characters.")]
         [MaxLength(100, ErrorMessage = "Please use less than 100 characters.")]
         public string Name { get; set; }
-        public SelectList Tags { get; set; }
-        public SelectList Dishes { get; set; }
+        public List<int> Tags { get; set; }
+        public List<int> Dishes { get; set; }
+        public List<Dish> DishData { get; set; }
+        public List<Tag> TagData { get; set; }
     }
     public class MealViewListItemModel //ListItem
     {

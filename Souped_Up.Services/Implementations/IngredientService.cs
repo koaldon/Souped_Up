@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace Souped_Up.Services.Implementations
 {
@@ -34,6 +35,11 @@ namespace Souped_Up.Services.Implementations
         {
             var ingredient = ingredientRepo.GetById(id);
             return ingredient;
+        }
+        public ICollection<Ingredient> GetUserIngredientSelectList(Guid id)
+        {
+            var ingredients = ingredientRepo.GetByUserId(id);
+            return (ingredients);
         }
         public IEnumerable<IngredientViewListModel> GetUserIngredients(Guid id)
         {

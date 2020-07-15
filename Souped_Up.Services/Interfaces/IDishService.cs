@@ -22,6 +22,8 @@ namespace Souped_Up.Services.Interfaces
 
         DishViewListModel GetUserDishes(Guid id);
 
+        ICollection<Dish> GetUserDishSelectList(Guid id);
+
         bool Delete(int id);
 
     }

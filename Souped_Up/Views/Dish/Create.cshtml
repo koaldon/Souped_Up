@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Create a Dish</h2>
 
 
 @using (Html.BeginForm())
@@ -26,30 +26,27 @@
             <h3>Ingredients</h3>
             <div class="row">
                 <div class="col-md-4">
-                    @*@Html.DropDownListFor(model => model.Ingredients, new SelectList(ViewBag.Ingredients, "Id", "Name"), "Select One")*@
-
 
                     <h6>Select Ingredients for this Dish</h6>
-                    <select id="multiselect" style="width: 250px;">
-                        @(Html.Kendo().MultiSelectFor(model=>model.Ingredients)
-            .Name("ingredientMultiSelect")
-            .Placeholder("Select Ingredients...")
+                   
+                    @Html.ListBoxFor(m=>m.Ingredients, new
+                   MultiSelectList(Model.IngredientData.OrderBy(c=>c.Name), "Id", "Name",
+                   Model.Ingredients), "Select Ingredients")
+                    @*@(Html.Kendo().(model=> model.Ingredients)
             .DataTextField("Name")
             .DataValueField("Id")
-            .AutoBind(true)
-            .Height(300)
-
+            .Placeholder("Select Ingredients...")
+            .AutoBind(false)
             .DataSource(source =>
             {
                 source.Read(read =>
                 {
                     read.Action("GetIngredients", "Dish");
-                })
-                .ServerFiltering(true);
 
+                });
             })
-            )
-                    </select>
+            .ValuePrimitive(true)
+            )*@
                 </div>
                 <div class="col-md-3">
                     @Html.ActionLink("Create New Ingredient", "Create", "Ingredient")
@@ -63,25 +60,27 @@
             <div class="row">
                 <div class="col-md-4">
                     <h6>Select Tags for this Dish</h6>
-                    <select id="multiselect" style="width: 250px;">
-                        @(Html.Kendo().MultiSelectFor(model => model.Tags)
-            .Name("tagMultiSelect")
-            .Placeholder("Select Tags...")
-            .DataTextField("Name")
-            .DataValueField("Id")
-            .Height(300)
-            .DataSource(source =>
-            {
+                    @Html.ListBoxFor(m => m.Tags, new
+                   MultiSelectList(Model.TagData.OrderBy(c => c.Name), "Id", "Name",
+                   Model.Tags), "Select Tags")
+
+                    @*@(Html.Kendo().MultiSelectFor(model => model.Tags)
+
+        .Placeholder("Select Tags...")
+        .DataTextField("Name")
+        .DataValueField("Id")
+        .Height(300)
+
+        .DataSource(source =>
+        {
 
             source.Read(read =>
             {
-                read.Action("GetTags","Dish");
-            })
-            .ServerFiltering(true);
+                read.Action("GetTags", "Dish");
+            });
+        })
+        )*@
 
-            })
-            )
-                    </select>
                 </div>
                 <div class="col-md-3">
                     @Html.ActionLink("Create New Tag", "Create", "Tag")
@@ -107,19 +106,4 @@
     @Scripts.Render("~/bundles/kendo")
 }
 
-<script>
-    $(document).ready(function () {
-        $("#ingredientMultiSelect").kendoMultiSelect({
-            dataTextField: "Name",
-            dataValueField: "Id",
-            dataSource: {
-                transport: {
-                    read: {
-                        dataType: "jsonp",
-                        url: "https://localhost:44392/Ingredient"
-                    }
-                }
-            }
-        });
-    });
-</script>
+

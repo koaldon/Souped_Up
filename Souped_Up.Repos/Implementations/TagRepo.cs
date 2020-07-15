@@ -12,11 +12,11 @@ namespace Souped_Up.Repos.Implementations
     {
         public TagRepo(ApplicationDbContext ctx)
         {
-            _db = ctx;
+            Db = ctx;
         }
         public ICollection<Tag> GetByUserId(Guid id)
         {
-            var tags = _db.Set<Tag>().Where(x => x.UserId == id).ToList();
+            var tags = Db.Set<Tag>().Where(x => x.UserId == id).ToList();
             return tags;
         }
     }

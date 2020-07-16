@@ -62,6 +62,11 @@ namespace Souped_Up.Models
         public List<int> Dishes { get; set; }
         public List<Dish> DishData { get; set; }
         public List<Tag> TagData { get; set; }
+        public MealViewEditModel()
+        {
+            Dishes = new List<int>();
+            Tags = new List<int>();
+        }
     }
     public class MealViewListItemModel //ListItem
     {

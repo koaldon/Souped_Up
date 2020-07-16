@@ -77,7 +77,13 @@ namespace Souped_Up.Controllers
         }
         public ActionResult Edit(int id)
         {
+            var userId = Guid.Parse(User.Identity.GetUserId());
             var model = DishService.GetEditById(id);
+            var ingredients = IngredientService.GetUserIngredientSelectList(userId);
+            var tags = TagService.GetUserTagSelectList(userId);
+            
+            model.IngredientData = ingredients.ToList();
+            model.TagData = tags.ToList();
             return View(model);
 
         }

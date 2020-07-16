@@ -77,7 +77,13 @@ namespace Souped_Up.Controllers
 
         public ActionResult Edit(int id)
         {
+            var userId = Guid.Parse(User.Identity.GetUserId());
             var model = MealService.GetEditById(id);
+            var dishes = DishService.GetUserDishSelectList(userId);
+            var tags = TagService.GetUserTagSelectList(userId);
+
+            model.DishData = dishes.ToList();
+            model.TagData = tags.ToList();
             return View(model);
 
         }
@@ -87,13 +93,10 @@ namespace Souped_Up.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            if (MealService.Update(model))
-            {
-                TempData["SaveResult"] = "Your meal was updated.";
-                return RedirectToAction("Index");
-            };
-            ModelState.AddModelError("", "Meal could not be updated.");
-            return View(model);
+            MealService.Update(model);
+            TempData["SaveResult"] = "Your meal was updated.";
+            return RedirectToAction("Index");
+
         }
         [ActionName("Delete")]
         public ActionResult Delete(int id)

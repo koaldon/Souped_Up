@@ -20,5 +20,10 @@ namespace Souped_Up.Repos.Implementations
             var meals = Db.Set<Meal>().Where(x => x.UserId == id).ToList();
             return meals;
         }
+        public override Meal GetById(int id)
+        {
+            var item = Db.Set<Meal>().Include(x => x.Dishes).Include(x => x.Tags).FirstOrDefault(x => x.Id == id);
+            return item;
+        }
     }
 }

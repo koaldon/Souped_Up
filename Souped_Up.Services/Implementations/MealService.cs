@@ -96,9 +96,22 @@ namespace Souped_Up.Services.Implementations
         {
             var meal = mealRepo.GetById(model.Id);
 
+            var dishes = new List<Dish>();
+            model.Dishes.ForEach(x =>
+            {
+                dishes.Add(dishRepo.GetById(x));
+
+            });
+            var tags = new List<Tag>();
+            model.Tags.ForEach(x =>
+            {
+                tags.Add(tagRepo.GetById(x));
+
+            });
+
             meal.Name = model.Name;
-           //meal.Dishes = model.Dishes;
-           // meal.Tags = model.Tags;
+            meal.Dishes = dishes;
+            meal.Tags = tags;
 
             return mealRepo.Update(meal);
 
@@ -110,8 +123,8 @@ namespace Souped_Up.Services.Implementations
             var model = new MealViewEditModel
             {
                 Name = meal.Name,
-                //Dishes = new SelectList(meal.Dishes),
-                //Tags = new SelectList(meal.Tags)
+                Dishes = meal.Dishes.Select(x => x.Id).ToList(),
+                Tags = meal.Tags.Select(x => x.Id).ToList()
             };
 
             return model;
